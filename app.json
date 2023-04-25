@@ -1,6 +1,6 @@
 {
   "expo": {
-    "name": "todo-expo-app",
+    "name": "Todo Expo App",
     "slug": "todo-expo-app",
     "version": "1.0.0",
     "orientation": "portrait",
@@ -21,10 +21,17 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#0D0D0D"
-      }
+      },
+      "package": "com.cleysonsilvame.todoexpoapp"
     },
     "web": {
       "favicon": "./assets/favicon.png"
-    }
+    },
+    "extra": {
+      "eas": {
+        "projectId": "71d12210-3d26-42c7-876a-1f678f05a196"
+      }
+    },
+    "owner": "cleysonsilvame"
   }
 }

@@ -42,4 +42,8 @@ export const styles = StyleSheet.create({
     borderRadius: 6,
     padding: 16,
   },
+  listContainer: {
+    marginTop: 20,    
+    gap: 8,
+  }
 });
