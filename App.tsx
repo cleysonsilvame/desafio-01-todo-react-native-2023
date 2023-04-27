@@ -6,7 +6,7 @@ import {
 import * as SplashScreen from "expo-splash-screen";
 import { StatusBar } from "expo-status-bar";
 import { useCallback } from "react";
-import { View } from "react-native";
+import { SafeAreaView, Text, View } from "react-native";
 
 import { styles } from "./App.styles";
 import { Home } from "./src/screens/Home";
@@ -23,7 +23,7 @@ export default function App() {
     () => fontsLoaded && SplashScreen.hideAsync(),
     [fontsLoaded]
   );
-  
+
   if (!fontsLoaded) {
     return null;
   }

@@ -4,18 +4,17 @@ import { theme } from "../../theme";
 export const styles = StyleSheet.create({
   container: {
     flex: 1,
+    width: "100%",
     alignItems: "center",
   },
   innerContainer: {
-    marginTop: -30,
-
-    width: "100%",
-    height: "100%",
-
+    flex: 1,
     paddingHorizontal: 20,
   },
 
   inputContainer: {
+    marginTop: -30,
+
     width: "100%",
     flexDirection: "row",
     alignItems: "center",
@@ -43,7 +42,7 @@ export const styles = StyleSheet.create({
     padding: 16,
   },
   listContainer: {
-    marginTop: 20,    
-    gap: 8,
-  }
+    flex: 1,
+    marginVertical: 20,
+  },
 });

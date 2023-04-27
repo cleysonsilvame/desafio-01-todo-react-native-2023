@@ -1,6 +1,15 @@
 import { AntDesign } from "@expo/vector-icons";
 import { useEffect, useState } from "react";
-import { TouchableOpacity, View } from "react-native";
+import {
+  FlatList,
+  Keyboard,
+  Platform,
+  SafeAreaView,
+  Text,
+  TouchableOpacity,
+  TouchableWithoutFeedback,
+  View,
+} from "react-native";
 import uuid from "react-native-uuid";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
@@ -45,7 +54,7 @@ export function Home() {
       isDone: false,
     };
 
-    setTasks(state => [...state, newTask]);
+    setTasks(state => [newTask, ...state]);
 
     setInputTask("");
   }
@@ -83,43 +92,49 @@ export function Home() {
   }, []);
 
   return (
-    <View style={styles.container}>
-      <Header />
-      <View style={styles.innerContainer}>
-        <View style={styles.inputContainer}>
-          <Input
-            value={inputTask}
-            onChangeText={value => setInputTask(value)}
-            onSubmitEditing={handleCreateNewTask}
-          />
-          <TouchableOpacity style={styles.button} onPress={handleCreateNewTask}>
-            <AntDesign
-              name="pluscircleo"
-              size={24}
-              color={theme.colors.base["gray-100"]}
-            />
-          </TouchableOpacity>
-        </View>
+    <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
+      <SafeAreaView style={styles.container}>
+        <Header />
 
-        <View>
+        <View style={styles.innerContainer}>
+          <View style={styles.inputContainer}>
+            <Input
+              value={inputTask}
+              onChangeText={value => setInputTask(value)}
+              onSubmitEditing={handleCreateNewTask}
+            />
+            <TouchableOpacity
+              style={styles.button}
+              onPress={handleCreateNewTask}
+            >
+              <AntDesign
+                name="pluscircleo"
+                size={24}
+                color={theme.colors.base["gray-100"]}
+              />
+            </TouchableOpacity>
+          </View>
+
           <TaskCountHeader createdCount={tasks.length} doneCount={doneCount} />
 
-          {Boolean(tasks.length) ? (
-            <View style={styles.listContainer}>
-              {tasks.map(task => (
+          <View style={styles.listContainer}>
+            <FlatList
+              data={tasks}
+              contentContainerStyle={{ flexGrow: 1 }}
+              renderItem={({ item }) => (
                 <ListItem
-                  key={task.id}
-                  task={task}
+                  task={item}
                   onCheckChanged={handleUpdateTask}
                   onDelete={handleDeleteTask}
                 />
-              ))}
-            </View>
-          ) : (
-            <EmptyList />
-          )}
+              )}
+              keyExtractor={item => item.id}
+              ItemSeparatorComponent={() => <View style={{ height: 10 }} />}
+              ListEmptyComponent={<EmptyList />}
+            />
+          </View>
         </View>
-      </View>
-    </View>
+      </SafeAreaView>
+    </TouchableWithoutFeedback>
   );
 }
